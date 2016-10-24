@@ -47,6 +47,8 @@ namespace AstrandTest
 
         public static Measurement FromReading(string bikestring)
         {
+            
+
             string[] splitMeasurementWhitespace = bikestring.Split(' ');
             string[] splitMeasurementTab = bikestring.Split('\t');
             // Do we have 8 values?
@@ -61,12 +63,12 @@ namespace AstrandTest
                 }
                 catch (FormatException f)
                 {
-                    Console.WriteLine(f.Message);
+                    
 
                 }
             }
-            Console.WriteLine("Broken Measurement");
-            return new Measurement(0, 0, 0, 0, 0, 0, TimeSpan.FromSeconds(0), 0);
+            
+            throw new NullReferenceException("Error'd bikstring");
         }
 
         public override string ToString()

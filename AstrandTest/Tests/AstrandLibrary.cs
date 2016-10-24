@@ -13,7 +13,7 @@ namespace AstrandTest.Tests
         //    return 0;
         //}
 
-        public static double getFactor(int leeftijd, int belasting, int HFss)
+        public static double getFactor(int leeftijd, double belasting, double HFss)
         {
             //VO2max[ml / kg / min] =
             return (0.00212 * belasting + 0.299) / (0.769 * HFss -48.5) * 1000;

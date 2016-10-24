@@ -15,6 +15,8 @@ namespace AstrandTest
         public TestGUI()
         {
             InitializeComponent();
+
+
         }
     }
 }

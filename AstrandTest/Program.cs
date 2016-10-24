@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static AstrandTest.Tests.AstrandWrapper;
+using System.Windows.Forms;
 
 namespace AstrandTest
 {
@@ -16,52 +18,59 @@ namespace AstrandTest
 
         public Program()
         {
-            
+
         }
 
-        public void Application()
+        public void App()
         {
-            // Run astrand test
-            Console.WriteLine("Welcome to the test application:");
-            Console.WriteLine("Press enter to start...");
-            ConsoleKey c = ConsoleKey.A;
+            Application.Run(new TestGUI());
+            //// Run astrand test
+            //Console.WriteLine("Welcome to the test application:");
+            //Console.WriteLine("Press enter to start...");
+            //ConsoleKey c = ConsoleKey.A;
 
-            while (c != ConsoleKey.Enter) {
-                c = Console.ReadKey().Key;
-            }
+            //while (c != ConsoleKey.Enter) {
+            //    c = Console.ReadKey().Key;
+            //}
 
-            Console.WriteLine("Connecting to bike...");
-            Bike = new Bike();
-            Bike.Connect();
+            //Console.WriteLine("Connecting to bike...");
+            //Bike = new Bike();
+            //Bike.Connect();
 
-            while (!Bike.BikePort.IsOpen)
-            {
-                Bike.Connect();
-                Console.WriteLine("Attempting bike connect attempt...");
-                Thread.Sleep(1000);           
-            }
+            //while (!Bike.BikePort.IsOpen)
+            //{
+            //    Bike.Connect();
+            //    Console.WriteLine("Attempting bike connect attempt...");
+            //    Thread.Sleep(1000);           
+            //}
 
-            Console.WriteLine("Bike is connected");
-            Console.WriteLine("Press enter to start AstrandTest");
+            //Console.WriteLine("Bike is connected");
+            //Console.WriteLine("Press enter to start AstrandTest");
 
-            ConsoleKey b = ConsoleKey.A;
+            //ConsoleKey b = ConsoleKey.A;
 
-            while (b != ConsoleKey.Enter)
-            {
-                b = Console.ReadKey().Key;
-            }
+            //while (b != ConsoleKey.Enter)
+            //{
+            //    b = Console.ReadKey().Key;
+            //}
 
             
+            //// Generate test
+            //AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandWrapper.CreateAstrandTestOne());
+            //// Start test
+            //astrand.Start();
 
-            AstrandWrapper astrand = new AstrandWrapper(Bike);
+            //while (!astrand.CancellationPending) { }
 
+            //AstrandResults results = astrand.endTest();
 
+            //Console.WriteLine("Your blabla is :" + results.score);
 
         }
 
         static void Main(string[] args)
         {
-            new Program().Application();            
+            new Program().App();            
         }
     }
 }
