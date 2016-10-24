@@ -1,0 +1,6 @@
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\bin\Debug\AstrandTest.exe.config
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\bin\Debug\AstrandTest.exe
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\bin\Debug\AstrandTest.pdb
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csprojResolveAssemblyReference.cache
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj\Debug\AstrandTest.exe
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj\Debug\AstrandTest.pdb
