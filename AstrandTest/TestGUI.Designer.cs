@@ -121,16 +121,16 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(639, 44);
+            this.listView1.Location = new System.Drawing.Point(639, 30);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(161, 248);
+            this.listView1.Size = new System.Drawing.Size(161, 262);
             this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(639, 13);
+            this.label5.Location = new System.Drawing.Point(635, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 20);
             this.label5.TabIndex = 9;
@@ -236,27 +236,27 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(530, 19);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 20);
+            this.label9.Size = new System.Drawing.Size(18, 20);
             this.label9.TabIndex = 17;
-            this.label9.Text = "{rpm}";
+            this.label9.Text = "0";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(530, 62);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(33, 20);
+            this.label10.Size = new System.Drawing.Size(18, 20);
             this.label10.TabIndex = 18;
-            this.label10.Text = "{hr}";
+            this.label10.Text = "0";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(530, 103);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 20);
+            this.label11.Size = new System.Drawing.Size(18, 20);
             this.label11.TabIndex = 19;
-            this.label11.Text = "{pwr}";
+            this.label11.Text = "0";
             // 
             // comboBox1
             // 
