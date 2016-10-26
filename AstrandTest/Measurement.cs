@@ -68,7 +68,7 @@ namespace AstrandTest
                 }
             }
             
-            throw new NullReferenceException("Error'd bikstring");
+            throw new NullReferenceException(bikestring);
         }
 
         public override string ToString()

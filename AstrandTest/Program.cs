@@ -14,7 +14,7 @@ namespace AstrandTest
     class Program
     {
 
-        public Bike Bike { get; set; }
+        public Bike Bike { get; set; } = new Bike();
 
         public Program()
         {
@@ -29,19 +29,19 @@ namespace AstrandTest
             //Console.WriteLine("Press enter to start...");
             //ConsoleKey c = ConsoleKey.A;
 
-            //while (c != ConsoleKey.Enter) {
+            //while (c != ConsoleKey.Enter)
+            //{
             //    c = Console.ReadKey().Key;
             //}
 
             //Console.WriteLine("Connecting to bike...");
-            //Bike = new Bike();
             //Bike.Connect();
-
+            
             //while (!Bike.BikePort.IsOpen)
             //{
             //    Bike.Connect();
             //    Console.WriteLine("Attempting bike connect attempt...");
-            //    Thread.Sleep(1000);           
+            //    Thread.Sleep(1000);
             //}
 
             //Console.WriteLine("Bike is connected");
@@ -54,7 +54,7 @@ namespace AstrandTest
             //    b = Console.ReadKey().Key;
             //}
 
-            
+
             //// Generate test
             //AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandWrapper.CreateAstrandTestOne());
             //// Start test
