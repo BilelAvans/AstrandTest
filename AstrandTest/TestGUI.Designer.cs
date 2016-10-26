@@ -62,7 +62,7 @@
             // 
             this.startTestButton.Location = new System.Drawing.Point(16, 133);
             this.startTestButton.Name = "startTestButton";
-            this.startTestButton.Size = new System.Drawing.Size(204, 45);
+            this.startTestButton.Size = new System.Drawing.Size(204, 60);
             this.startTestButton.TabIndex = 1;
             this.startTestButton.Text = "Start Test";
             this.startTestButton.UseVisualStyleBackColor = true;
@@ -185,7 +185,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(16, 264);
+            this.resetButton.Location = new System.Drawing.Point(16, 250);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(204, 45);
             this.resetButton.TabIndex = 14;

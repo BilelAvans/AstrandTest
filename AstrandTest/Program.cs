@@ -23,6 +23,7 @@ namespace AstrandTest
 
         public void App()
         {
+            Application.EnableVisualStyles();
             Application.Run(new TestGUI());
             //// Run astrand test
             //Console.WriteLine("Welcome to the test application:");
