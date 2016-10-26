@@ -60,6 +60,12 @@
     <Compile Include="TestGUI.designer.cs">
       <DependentUpon>TestGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestResultPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestResultPanel.Designer.cs">
+      <DependentUpon>TestResultPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tests\AstrandLibrary.cs" />
     <Compile Include="Tests\AstrandWrapper.cs">
       <SubType>Component</SubType>
@@ -72,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="TestGUI.resx">
       <DependentUpon>TestGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestResultPanel.resx">
+      <DependentUpon>TestResultPanel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

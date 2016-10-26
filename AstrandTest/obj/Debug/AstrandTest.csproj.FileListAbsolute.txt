@@ -14,3 +14,4 @@ C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\bin\Debug\AstrandTest.pdb
 C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csprojResolveAssemblyReference.cache
 C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestGUI.resources
 C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csproj.GenerateResource.Cache
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestResultPanel.resources

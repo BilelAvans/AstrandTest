@@ -21,7 +21,11 @@ namespace AstrandTest
         public TestGUI()
         {
             InitializeComponent();
-            
+
+            TabPage page = new TabPage("This Training");
+            page.Controls.Add(new TestResultPanel());
+
+            tabControl1.TabPages.Add(page);
         }
 
         private void connectToBikeButton_Click(object sender, EventArgs e)
