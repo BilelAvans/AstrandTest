@@ -64,7 +64,7 @@
     <Compile Include="Tests\AstrandWrapper.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Tests\WhileAstrandRequirements.cs" />
+    <Compile Include="Tests\AstrandPeriod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

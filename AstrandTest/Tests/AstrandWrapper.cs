@@ -13,20 +13,23 @@ namespace AstrandTest.Tests
 
         public Bike TurboBike { get; set; }
 
-        public List<Measurement> Measurements = new List<Measurement>();
+        private List<Measurement> Measurements = new List<Measurement>();
 
-        public DateTime LastMeasurementTakenAt;
+        private List<Measurement> MeasurementsDuringAstrandTest = new List<Measurement>();
 
-        public Queue<WhileAstrandRequirements> RequirementsSheets = new Queue<WhileAstrandRequirements>();
-        
-        public AstrandWrapper(Bike TurboBike, Queue<WhileAstrandRequirements> requirements)
+        private DateTime LastMeasurementTakenAt;
+
+        private Queue<AstrandPeriod> RequirementsSheets = new Queue<AstrandPeriod>();
+
+        public bool Paused { get; set; }
+        // bike must be connected before using it
+        public AstrandWrapper(Bike TurboBike, Queue<AstrandPeriod> requirements)
         {
             this.TurboBike = TurboBike;
             RequirementsSheets = requirements;
 
             this.WorkerReportsProgress = true;
             this.WorkerSupportsCancellation = true;
-            
         }
 
         public void Start()
@@ -46,68 +49,74 @@ namespace AstrandTest.Tests
         {
             while (!args.Cancel)
             {
+                //getMeasurementFromBike();
                 Console.WriteLine("In Test");
                 while (RequirementsSheets.Count > 0)
                 {
-                    // Create measurement from bike
-                    getMeasurementFromBike();
                     
-                    WhileAstrandRequirements req = RequirementsSheets.Dequeue();
+                    // Get a requirement until timeline requires new one
+                    AstrandPeriod req = RequirementsSheets.Dequeue();
+                    TurboBike.SetPower(req.requestedPower);
 
                     DateTime now = DateTime.Now;
-                    DateTime end = now + req.sessionTime;
+                    DateTime end = now + req.PeriodLength;
 
-                    while (DateTime.Now < end) { 
-                    
+                    while (DateTime.Now < end) {
+                        while (Paused) { }
+                        // Create measurement from bike
+                        
+
                         if (req.AdjustPower)
                         {
                             int offset = req.rpm - Measurements.Last().Rpm;
                             int totalOffset = Math.Abs(offset);
+
                             try
                             {
                                 if (!(totalOffset > (req.rpm / (100 / req.AllowedOffset))))
                                 {
                                     if (Measurements.Last().Pulse < 130)
                                     {
-                                        // Not properly doing the test, going too slow or fast
+                                        // Heart rate needs to be higher (so increase friction on the bike)
                                         TurboBike.SetPower(++req.requestedPower);
                                     }
 
                                     Thread.Sleep(200);
-                                    getMeasurementFromBike();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Total offset is " + offset.ToString());
-                                    getMeasurementFromBike();
                                 }
                             } catch (ArithmeticException e)
                             {
-                                Console.WriteLine("You're not moving?");
-                                getMeasurementFromBike();
+                                //Console.WriteLine("You're not moving?");
+                                
                             }
+
+                            // Wait a second
                             Thread.Sleep(1000);
                         }
+
+                        if (req.UseMeasurements)
+                            MeasurementsDuringAstrandTest.Add(Measurements.Last());
+  
                     }
+                    
                 }
+                CancelAsync();
+
             }
 
             Console.WriteLine("Test done, Bye!");
         }
 
-        public AstrandResults endTest()
+        public AstrandResults endTest(int age, int weight, bool isFemale)
         {
             this.Stop();
+            
+            double averagePulse = MeasurementsDuringAstrandTest.Average(m => m.Pulse);
+            double averagePower = MeasurementsDuringAstrandTest.Average(m => m.Act_power);
 
-            int leeftijd = 20;
-            double averagePulse = Measurements.Average(m => m.Pulse);
-            double averagePower = Measurements.Average(m => m.Act_power);
-
-            AstrandResults results = new AstrandResults();
-            results.score = AstrandLibrary.getFactor(leeftijd, averagePower, averagePulse);
-
-            return results;
-
+            return new AstrandResults()
+            {
+                score = AstrandLibrary.getFactor(age, averagePower, averagePulse)
+            };
         }
 
         private bool getMeasurementFromBike()
@@ -127,45 +136,9 @@ namespace AstrandTest.Tests
             return false;
         }
 
-        public static Queue<WhileAstrandRequirements> CreateAstrandTestOne()
-        {
-            Queue<WhileAstrandRequirements> reqs = new Queue<WhileAstrandRequirements>();
 
-            reqs.Enqueue(new WhileAstrandRequirements
-            {
-                sessionTime = TimeSpan.FromMinutes(1),
-                requestedPower = 50,
-                AdjustPower = true,
-                AllowedOffset = 5
-            });
 
-            reqs.Enqueue(new WhileAstrandRequirements()
-            {
-                sessionTime = TimeSpan.FromMinutes(1),
-                requestedPower = 75
-            });
 
-            reqs.Enqueue(new WhileAstrandRequirements()
-            {
-                sessionTime = TimeSpan.FromMinutes(6),
-                requestedPower = 100,
-                AdjustPower = true
-            });
-
-            reqs.Enqueue(new WhileAstrandRequirements()
-            {
-                sessionTime = TimeSpan.FromMinutes(1),
-                requestedPower = 75
-            });
-
-            reqs.Enqueue(new WhileAstrandRequirements
-            {
-                sessionTime = TimeSpan.FromMinutes(1),
-                requestedPower = 50
-            });
-
-            return reqs;
-        }
 
         public struct AstrandResults
         {

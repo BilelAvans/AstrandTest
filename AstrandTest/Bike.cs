@@ -12,6 +12,7 @@ namespace AstrandTest
     public class Bike
     {
         public SerialPort BikePort;
+        
 
         public Bike()
         {
