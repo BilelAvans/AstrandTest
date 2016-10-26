@@ -6,3 +6,11 @@ c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj
 c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj\Debug\AstrandTest.pdb
 c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestGUI.resources
 c:\users\bilel\documents\visual studio 2015\Projects\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csproj.GenerateResource.Cache
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\bin\Debug\AstrandTest.exe.config
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.exe
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.pdb
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\bin\Debug\AstrandTest.exe
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\bin\Debug\AstrandTest.pdb
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csprojResolveAssemblyReference.cache
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestGUI.resources
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csproj.GenerateResource.Cache
