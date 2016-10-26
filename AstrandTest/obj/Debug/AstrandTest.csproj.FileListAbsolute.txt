@@ -15,3 +15,4 @@ C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csprojR
 C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestGUI.resources
 C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csproj.GenerateResource.Cache
 C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestResultPanel.resources
+C:\Users\Nard\Source\Repos\AstrandTest\AstrandTest\obj\Debug\AstrandTest.Properties.Resources.resources
