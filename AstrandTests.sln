@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstrandServer", "AstrandServer\AstrandServer.csproj", "{04171C19-1804-4DB8-9F04-313A6129C2EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstrandClient", "AstrandClient\AstrandClient.csproj", "{1E316B9A-4699-4298-9159-A7C013682591}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{2A57DD0D-5541-48FB-847A-6DFD4AFDD2DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04171C19-1804-4DB8-9F04-313A6129C2EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04171C19-1804-4DB8-9F04-313A6129C2EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04171C19-1804-4DB8-9F04-313A6129C2EA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{04171C19-1804-4DB8-9F04-313A6129C2EA}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{1E316B9A-4699-4298-9159-A7C013682591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E316B9A-4699-4298-9159-A7C013682591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E316B9A-4699-4298-9159-A7C013682591}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E316B9A-4699-4298-9159-A7C013682591}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{2A57DD0D-5541-48FB-847A-6DFD4AFDD2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A57DD0D-5541-48FB-847A-6DFD4AFDD2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A57DD0D-5541-48FB-847A-6DFD4AFDD2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A57DD0D-5541-48FB-847A-6DFD4AFDD2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

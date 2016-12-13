@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AstrandTest.Tests
+namespace DataLibrary.Tests
 {
     public static class AstrandLibrary
     {
@@ -36,7 +36,7 @@ namespace AstrandTest.Tests
                                                         2.1, 2.0, 2.0, 2.0, 2.0, 2.0, 1.9, 1.9, 1.9, 1.9,
                                                         1.8 };
 
-                        return powers[watts - 120];
+                        return powers[hf - 120];
                     } else
                     {
                         powers = new double[] {         4.1, 4.0, 3.9, 3.9, 3.8, 3.7, 3.6, 3.5, 3.5, 3.4,
@@ -46,13 +46,13 @@ namespace AstrandTest.Tests
                                                         2.2, 2.2, 2.2, 2.2, 2.1, 2.1, 2.1, 2.1, 2.0, 2.0,
                                                         2.0 };
 
-                        return powers[watts - 120];
+                        return powers[hf - 120];
                     }
                 }
                 
             }
 
-            throw new NullReferenceException("Watts must be between 120 and 170");
+            throw new NullReferenceException("hartrate must be between 120 and 170");
         }
 
         public static double correctionFactorByAge(int age)
@@ -77,7 +77,7 @@ namespace AstrandTest.Tests
             throw new NullReferenceException("Age must be between 15 and 65");
         }
 
-        public static Queue<AstrandPeriod> CreateAstrandTestOneShort()
+        public static Queue<AstrandPeriod> CreateDataLibraryOneShort()
         {
             Queue<AstrandPeriod> reqs = new Queue<AstrandPeriod>();
             // Warming up
@@ -118,7 +118,7 @@ namespace AstrandTest.Tests
             return reqs;
         }
 
-        public static Queue<AstrandPeriod> CreateAstrandTestOne()
+        public static Queue<AstrandPeriod> CreateDataLibraryOne()
         {
             Queue<AstrandPeriod> reqs = new Queue<AstrandPeriod>();
             // Warming up
@@ -128,27 +128,27 @@ namespace AstrandTest.Tests
                 requestedPower = 50
             });
 
-            reqs.Enqueue(new AstrandPeriod()
-            {
-                PeriodLength = TimeSpan.FromMinutes(1),
-                requestedPower = 75
-            });
+            //reqs.Enqueue(new AstrandPeriod()
+            //{
+            //    PeriodLength = TimeSpan.FromMinutes(1),
+            //    requestedPower = 75
+            //});
             // Test phase
 
             reqs.Enqueue(new AstrandPeriod()
             {
-                PeriodLength = TimeSpan.FromMinutes(6),
+                PeriodLength = TimeSpan.FromMinutes(2),
                 requestedPower = 100,
                 AdjustPower = true,
                 AllowedOffset = 5,
                 UseMeasurements = true
             });
             // Cooling down
-            reqs.Enqueue(new AstrandPeriod()
-            {
-                PeriodLength = TimeSpan.FromMinutes(1),
-                requestedPower = 75
-            });
+            //reqs.Enqueue(new AstrandPeriod()
+            //{
+            //    PeriodLength = TimeSpan.FromMinutes(1),
+            //    requestedPower = 75
+            //});
 
             reqs.Enqueue(new AstrandPeriod
             {

@@ -1,0 +1,8 @@
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandServer\bin\Debug\AstrandServer.exe.config
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandServer\obj\Debug\AstrandServer.csprojResolveAssemblyReference.cache
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandServer\bin\Debug\AstrandServer.exe
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandServer\bin\Debug\AstrandServer.pdb
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandServer\obj\Debug\AstrandServer.exe
+c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandServer\obj\Debug\AstrandServer.pdb
+C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\AstrandServer\bin\Debug\DataLibrary.dll
+C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\AstrandServer\bin\Debug\DataLibrary.pdb
