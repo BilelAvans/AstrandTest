@@ -19,7 +19,7 @@ namespace AstrandTest.Tests
             return (0.00212 * belasting + 0.299) / (0.769 * HFss -48.5) * 1000;
         }
 
-        public static double getCorrectieFactor(int watts, int hf, bool isFemale)
+        public static double GetCorrectieFactor(int watts, int hf, bool isFemale)
         {
             if (hf > 120 && hf < 170)
             {
