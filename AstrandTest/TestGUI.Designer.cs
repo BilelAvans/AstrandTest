@@ -66,9 +66,10 @@
             this.startTestButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.startTestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startTestButton.ForeColor = System.Drawing.Color.Black;
-            this.startTestButton.Location = new System.Drawing.Point(16, 135);
+            this.startTestButton.Location = new System.Drawing.Point(14, 108);
+            this.startTestButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.startTestButton.Name = "startTestButton";
-            this.startTestButton.Size = new System.Drawing.Size(204, 60);
+            this.startTestButton.Size = new System.Drawing.Size(181, 48);
             this.startTestButton.TabIndex = 1;
             this.startTestButton.Text = "Start Test";
             this.startTestButton.UseVisualStyleBackColor = false;
@@ -80,9 +81,9 @@
             this.label1.BackColor = System.Drawing.Color.Black;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(27, 20);
+            this.label1.Location = new System.Drawing.Point(24, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 32);
+            this.label1.Size = new System.Drawing.Size(69, 29);
             this.label1.TabIndex = 2;
             this.label1.Text = "Time";
             // 
@@ -92,17 +93,18 @@
             this.label2.BackColor = System.Drawing.Color.Black;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(25, 59);
+            this.label2.Location = new System.Drawing.Point(24, 47);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 32);
+            this.label2.Size = new System.Drawing.Size(70, 29);
             this.label2.TabIndex = 3;
             this.label2.Text = "0 : 00";
             // 
             // ageTextBox
             // 
-            this.ageTextBox.Location = new System.Drawing.Point(93, 8);
+            this.ageTextBox.Location = new System.Drawing.Point(83, 6);
+            this.ageTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ageTextBox.Name = "ageTextBox";
-            this.ageTextBox.Size = new System.Drawing.Size(127, 26);
+            this.ageTextBox.Size = new System.Drawing.Size(113, 22);
             this.ageTextBox.TabIndex = 4;
             // 
             // label3
@@ -111,9 +113,9 @@
             this.label3.BackColor = System.Drawing.Color.Black;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Location = new System.Drawing.Point(11, 7);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 22);
+            this.label3.Size = new System.Drawing.Size(33, 18);
             this.label3.TabIndex = 5;
             this.label3.Text = "Age";
             // 
@@ -123,24 +125,26 @@
             this.label4.BackColor = System.Drawing.Color.Black;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(12, 47);
+            this.label4.Location = new System.Drawing.Point(11, 38);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 22);
+            this.label4.Size = new System.Drawing.Size(54, 18);
             this.label4.TabIndex = 6;
             this.label4.Text = "Weight";
             // 
             // weightTextBox
             // 
-            this.weightTextBox.Location = new System.Drawing.Point(93, 46);
+            this.weightTextBox.Location = new System.Drawing.Point(83, 37);
+            this.weightTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weightTextBox.Name = "weightTextBox";
-            this.weightTextBox.Size = new System.Drawing.Size(127, 26);
+            this.weightTextBox.Size = new System.Drawing.Size(113, 22);
             this.weightTextBox.TabIndex = 7;
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(638, 38);
+            this.listView1.Location = new System.Drawing.Point(567, 30);
+            this.listView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(176, 277);
+            this.listView1.Size = new System.Drawing.Size(157, 222);
             this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -150,9 +154,9 @@
             this.label5.BackColor = System.Drawing.Color.Black;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(634, 8);
+            this.label5.Location = new System.Drawing.Point(564, 6);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 22);
+            this.label5.Size = new System.Drawing.Size(55, 18);
             this.label5.TabIndex = 9;
             this.label5.Text = "History";
             // 
@@ -162,19 +166,22 @@
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(16, 315);
+            this.groupBox1.Location = new System.Drawing.Point(14, 252);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(798, 249);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(709, 199);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Measurements";
             // 
             // tabControl1
             // 
-            this.tabControl1.Location = new System.Drawing.Point(8, 25);
+            this.tabControl1.Location = new System.Drawing.Point(7, 20);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(784, 214);
+            this.tabControl1.Size = new System.Drawing.Size(697, 171);
             this.tabControl1.TabIndex = 0;
             // 
             // label6
@@ -183,9 +190,9 @@
             this.label6.BackColor = System.Drawing.Color.Black;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(27, 98);
+            this.label6.Location = new System.Drawing.Point(24, 78);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(144, 32);
+            this.label6.Size = new System.Drawing.Size(121, 29);
             this.label6.TabIndex = 11;
             this.label6.Text = "HeartRate";
             // 
@@ -195,9 +202,9 @@
             this.label7.BackColor = System.Drawing.Color.Black;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(216, 20);
+            this.label7.Location = new System.Drawing.Point(190, 16);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 32);
+            this.label7.Size = new System.Drawing.Size(66, 29);
             this.label7.TabIndex = 12;
             this.label7.Text = "RPM";
             // 
@@ -206,9 +213,10 @@
             this.pauseTestButton.BackColor = System.Drawing.Color.White;
             this.pauseTestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pauseTestButton.ForeColor = System.Drawing.Color.Black;
-            this.pauseTestButton.Location = new System.Drawing.Point(16, 209);
+            this.pauseTestButton.Location = new System.Drawing.Point(14, 167);
+            this.pauseTestButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pauseTestButton.Name = "pauseTestButton";
-            this.pauseTestButton.Size = new System.Drawing.Size(204, 45);
+            this.pauseTestButton.Size = new System.Drawing.Size(181, 36);
             this.pauseTestButton.TabIndex = 13;
             this.pauseTestButton.Text = "Pause Test";
             this.pauseTestButton.UseVisualStyleBackColor = false;
@@ -219,9 +227,10 @@
             this.resetButton.BackColor = System.Drawing.Color.White;
             this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetButton.ForeColor = System.Drawing.Color.Black;
-            this.resetButton.Location = new System.Drawing.Point(16, 260);
+            this.resetButton.Location = new System.Drawing.Point(14, 208);
+            this.resetButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(204, 45);
+            this.resetButton.Size = new System.Drawing.Size(181, 36);
             this.resetButton.TabIndex = 14;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = false;
@@ -233,9 +242,9 @@
             this.label8.BackColor = System.Drawing.Color.Black;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(214, 98);
+            this.label8.Location = new System.Drawing.Point(190, 78);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(95, 32);
+            this.label8.Size = new System.Drawing.Size(83, 29);
             this.label8.TabIndex = 15;
             this.label8.Text = "Power";
             // 
@@ -243,9 +252,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(253, 187);
+            this.pictureBox1.Location = new System.Drawing.Point(225, 150);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(343, 161);
+            this.pictureBox1.Size = new System.Drawing.Size(305, 129);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
@@ -256,9 +266,9 @@
             this.label9.BackColor = System.Drawing.Color.Black;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(214, 59);
+            this.label9.Location = new System.Drawing.Point(190, 47);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 32);
+            this.label9.Size = new System.Drawing.Size(26, 29);
             this.label9.TabIndex = 17;
             this.label9.Text = "0";
             // 
@@ -268,9 +278,9 @@
             this.label10.BackColor = System.Drawing.Color.Black;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(27, 137);
+            this.label10.Location = new System.Drawing.Point(24, 110);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(31, 32);
+            this.label10.Size = new System.Drawing.Size(26, 29);
             this.label10.TabIndex = 18;
             this.label10.Text = "0";
             // 
@@ -280,9 +290,9 @@
             this.label11.BackColor = System.Drawing.Color.Black;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(214, 137);
+            this.label11.Location = new System.Drawing.Point(190, 110);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 32);
+            this.label11.Size = new System.Drawing.Size(26, 29);
             this.label11.TabIndex = 19;
             this.label11.Text = "0";
             // 
@@ -294,9 +304,10 @@
             "Female",
             "Unicorn",
             "Other"});
-            this.sexComboBox.Location = new System.Drawing.Point(93, 85);
+            this.sexComboBox.Location = new System.Drawing.Point(83, 68);
+            this.sexComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sexComboBox.Name = "sexComboBox";
-            this.sexComboBox.Size = new System.Drawing.Size(127, 28);
+            this.sexComboBox.Size = new System.Drawing.Size(113, 24);
             this.sexComboBox.TabIndex = 20;
             // 
             // label12
@@ -305,9 +316,9 @@
             this.label12.BackColor = System.Drawing.Color.Black;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(12, 86);
+            this.label12.Location = new System.Drawing.Point(11, 69);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 22);
+            this.label12.Size = new System.Drawing.Size(33, 18);
             this.label12.TabIndex = 21;
             this.label12.Text = "Sex";
             // 
@@ -317,10 +328,10 @@
             this.label13.BackColor = System.Drawing.Color.Black;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(20, 580);
+            this.label13.Location = new System.Drawing.Point(18, 464);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 22);
+            this.label13.Size = new System.Drawing.Size(83, 18);
             this.label13.TabIndex = 22;
             this.label13.Text = "BikeStatus:";
             // 
@@ -330,10 +341,10 @@
             this.bikeConnectionStatusLabel.BackColor = System.Drawing.Color.Black;
             this.bikeConnectionStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bikeConnectionStatusLabel.ForeColor = System.Drawing.Color.White;
-            this.bikeConnectionStatusLabel.Location = new System.Drawing.Point(140, 580);
+            this.bikeConnectionStatusLabel.Location = new System.Drawing.Point(124, 464);
             this.bikeConnectionStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bikeConnectionStatusLabel.Name = "bikeConnectionStatusLabel";
-            this.bikeConnectionStatusLabel.Size = new System.Drawing.Size(130, 22);
+            this.bikeConnectionStatusLabel.Size = new System.Drawing.Size(108, 18);
             this.bikeConnectionStatusLabel.TabIndex = 23;
             this.bikeConnectionStatusLabel.Text = "Not Connected";
             // 
@@ -342,10 +353,10 @@
             this.connectToBikeButton.BackColor = System.Drawing.Color.White;
             this.connectToBikeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.connectToBikeButton.ForeColor = System.Drawing.Color.Black;
-            this.connectToBikeButton.Location = new System.Drawing.Point(639, 575);
-            this.connectToBikeButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.connectToBikeButton.Location = new System.Drawing.Point(568, 460);
+            this.connectToBikeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.connectToBikeButton.Name = "connectToBikeButton";
-            this.connectToBikeButton.Size = new System.Drawing.Size(169, 35);
+            this.connectToBikeButton.Size = new System.Drawing.Size(150, 28);
             this.connectToBikeButton.TabIndex = 24;
             this.connectToBikeButton.Text = "Connect to bike";
             this.connectToBikeButton.UseVisualStyleBackColor = false;
@@ -361,18 +372,19 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Location = new System.Drawing.Point(253, 9);
+            this.panel1.Location = new System.Drawing.Point(225, 7);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 194);
+            this.panel1.Size = new System.Drawing.Size(305, 155);
             this.panel1.TabIndex = 20;
             // 
             // TestGUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(827, 623);
+            this.ClientSize = new System.Drawing.Size(735, 498);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.connectToBikeButton);
             this.Controls.Add(this.bikeConnectionStatusLabel);
@@ -392,6 +404,7 @@
             this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TestGUI";
             this.Text = "Astrand Test";
             this.groupBox1.ResumeLayout(false);
