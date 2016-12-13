@@ -109,6 +109,7 @@
             this.ageTextBox.Name = "ageTextBox";
             this.ageTextBox.Size = new System.Drawing.Size(86, 20);
             this.ageTextBox.TabIndex = 4;
+            this.ageTextBox.Text = "23";
             // 
             // label3
             // 
@@ -143,6 +144,7 @@
             this.weightTextBox.Name = "weightTextBox";
             this.weightTextBox.Size = new System.Drawing.Size(86, 20);
             this.weightTextBox.TabIndex = 7;
+            this.weightTextBox.Text = "80";
             // 
             // trainingsListView
             // 

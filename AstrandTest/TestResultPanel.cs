@@ -13,8 +13,6 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static DataLibrary.Tests.AstrandWrapper;
 using static System.Windows.Forms.TabControl;
-using DataLibrary.Tests;
-using DataLibrary;
 
 namespace AstrandTest
 {

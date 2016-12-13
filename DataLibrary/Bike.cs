@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace DataLibrary
         {
             try
             {
+                Debug.WriteLine("Hallo");
+
                 if (!IsConnected)
                     BikePort.Open();
             }
@@ -33,7 +36,7 @@ namespace DataLibrary
             }
 
         }
-
+        
         public void Disconnect()
         {
             throw new NotImplementedException();

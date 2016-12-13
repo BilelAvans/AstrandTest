@@ -17,7 +17,7 @@ namespace AstrandTest
     public partial class TestGUI : Form
     {
         public AstrandWrapper Test { get; set; }
-        public Bike Bike { get; set; } = new Bike();
+        public Bike Bike { get; set; } = new BikeSim();
 
         public List<AstrandHistory> History = new List<AstrandHistory>();
 
@@ -26,8 +26,6 @@ namespace AstrandTest
 
         public TestGUI()
         {
-            InitializeComponent();
-
             InitializeComponent();
 
             loadOptionsIntoTrainingsList();
