@@ -143,7 +143,7 @@ namespace DataLibrary.Tests
 
             return new AstrandResults()
             {
-                score = AstrandLibrary.getFactor(age, averagePower, averagePulse) * AstrandLibrary.getCorrectieFactor(100, 130, isFemale)
+                score = AstrandLibrary.getFactor(age, averagePower, averagePulse) * AstrandLibrary.GetCorrectieFactor(100, 130, isFemale)
             };
         }
         

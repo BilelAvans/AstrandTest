@@ -26,3 +26,5 @@ C:\Users\Bilel\Documents\AstrandTest\AstrandTest\obj\Debug\AstrandTest.Propertie
 C:\Users\Bilel\Documents\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestGUI.resources
 C:\Users\Bilel\Documents\AstrandTest\AstrandTest\obj\Debug\AstrandTest.TestResultPanel.resources
 C:\Users\Bilel\Documents\AstrandTest\AstrandTest\obj\Debug\AstrandTest.csproj.GenerateResource.Cache
+C:\Users\Bilel\Documents\AstrandTest\AstrandTest\bin\Debug\DataLibrary.dll
+C:\Users\Bilel\Documents\AstrandTest\AstrandTest\bin\Debug\DataLibrary.pdb
