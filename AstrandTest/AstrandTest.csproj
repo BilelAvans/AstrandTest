@@ -50,8 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bike.cs" />
-    <Compile Include="Measurement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -71,11 +69,6 @@
     <Compile Include="TestResultPanel.Designer.cs">
       <DependentUpon>TestResultPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\AstrandLibrary.cs" />
-    <Compile Include="Tests\AstrandWrapper.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Tests\AstrandPeriod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -91,6 +84,12 @@
     <EmbeddedResource Include="TestResultPanel.resx">
       <DependentUpon>TestResultPanel.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj">
+      <Project>{2a57dd0d-5541-48fb-847a-6dfd4afdd2df}</Project>
+      <Name>DataLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

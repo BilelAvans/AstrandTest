@@ -7,24 +7,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AstrandTest
+namespace DataLibrary
 {
     public class Bike
     {
         public SerialPort BikePort;
+
+        public virtual bool IsConnected { get { return (bool)BikePort?.IsOpen; } }
         
 
         public Bike()
         {
-
+            BikePort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
         }
 
-        public void Connect()
+        public virtual void Connect()
         {
             try
             {
-                BikePort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
-                BikePort.Open();
+                if (!IsConnected)
+                    BikePort.Open();
             }
             catch (IOException ex)
             {
@@ -37,7 +39,7 @@ namespace AstrandTest
             throw new NotImplementedException();
         }
 
-        public string GetID()
+        public virtual string GetID()
         {
             BikePort.WriteLine("ID");
 
@@ -48,13 +50,13 @@ namespace AstrandTest
             return BikePort.ReadLine();
         }
 
-        public Measurement GetMeasurement()
+        public virtual Measurement GetMeasurement()
         {
             // Send "ST" command
             BikePort.WriteLine("ST");
 
             // Wait for results
-            Thread.Sleep(250);
+            Thread.Sleep(125);
 
             // Read results
 
@@ -67,7 +69,7 @@ namespace AstrandTest
             return message;
         }
 
-        public string GetVersion()
+        public virtual string GetVersion()
         {
             BikePort.WriteLine("VE");
 
@@ -81,25 +83,25 @@ namespace AstrandTest
             BikePort.WriteLine("RS");
         }
 
-        public void SetDistance(int distance)
+        public virtual void SetDistance(int distance)
         {
             BikePort.WriteLine("CM");
             BikePort.WriteLine("PD " + distance);
         }
 
-        public void SetEnergy(int energy)
+        public virtual void SetEnergy(int energy)
         {
             BikePort.WriteLine("CM");
             BikePort.WriteLine("PE " + energy);
         }
 
-        public void SetPower(int power)
+        public virtual void SetPower(int power)
         {
             BikePort.WriteLine("CM");
             BikePort.WriteLine("PW " + power);
         }
 
-        public void SetTime(int time)
+        public virtual void SetTime(int time)
         {
             BikePort.WriteLine("CM");
             BikePort.WriteLine("PT " + time);

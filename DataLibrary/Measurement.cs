@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace AstrandTest
+namespace DataLibrary
 {
     [Serializable]
     public class Measurement
@@ -67,8 +67,8 @@ namespace AstrandTest
 
                 }
             }
-            
-            throw new NullReferenceException(bikestring);
+
+            return null;
         }
 
         public override string ToString()
