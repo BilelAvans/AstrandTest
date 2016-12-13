@@ -1,4 +1,6 @@
 ﻿using AstrandTest.Tests;
+using DataLibrary;
+using DataLibrary.Tests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AstrandTest.Tests.AstrandWrapper;
+using static DataLibrary.Tests.AstrandWrapper;
 
 namespace AstrandTest
 {
@@ -56,7 +58,7 @@ namespace AstrandTest
             if (b && age > 0 && weight > 0 && gender != "")
             {
                 // Generate test
-                AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandLibrary.CreateAstrandTestOneShort());
+                AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandLibrary.CreateDataLibraryOne());
                 this.Test = astrand;
                 // Start test
                 astrand.Start();

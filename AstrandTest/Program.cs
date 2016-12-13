@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static AstrandTest.Tests.AstrandWrapper;
+using static DataLibrary.Tests.AstrandWrapper;
 using System.Windows.Forms;
+using DataLibrary;
 
 namespace AstrandTest
 {
