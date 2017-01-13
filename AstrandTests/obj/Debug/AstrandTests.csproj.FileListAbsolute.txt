@@ -1,1 +1,0 @@
-c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandTests\bin\Debug\AstrandTests.exe.config

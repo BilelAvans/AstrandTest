@@ -23,7 +23,7 @@ namespace DataLibrary.Tests
 
         private Queue<AstrandPeriod> RequirementsSheets = new Queue<AstrandPeriod>();
 
-        public event EventHandler Handler, Done;
+        public event EventHandler Handler, NewRequirements, Done;
         
 
         public  RunStatus Status { get; set; }
@@ -60,12 +60,20 @@ namespace DataLibrary.Tests
             while (!args.Cancel)
             {
                 this.Status = RunStatus.RUNNING;
-                
+                // Set bike time to 0
+                TurboBike.SetTime(0);
+
                 while (RequirementsSheets.Count > 0)
                 {
  
                     // Get a requirement until timeline requires new one
                     AstrandPeriod req = RequirementsSheets.Dequeue();
+                    NewRequirement(req);
+
+                    BikeSim simBike = TurboBike as BikeSim;
+                    if (simBike != null)
+                        simBike.setAveragePulse(req.pulse + new Random().Next(20));
+
                     //TurboBike.SetPower(req.requestedPower);
 
                     DateTime now = DateTime.Now;
@@ -73,8 +81,9 @@ namespace DataLibrary.Tests
                                      
 
                     while (DateTime.Now < end && Status != RunStatus.STOPPED) {
-                        while (Paused) { this.Status = RunStatus.PAUSED; }
+                        while (Paused) { this.Status = RunStatus.PAUSED; Thread.Sleep(1000); now = now + TimeSpan.FromSeconds(1); }
                         TurboBike.SetPower(req.requestedPower);
+                        
                         // Create measurement from bike
                         Measurement m = TurboBike.GetMeasurement();
                         Measurements.Add(m);
@@ -82,11 +91,7 @@ namespace DataLibrary.Tests
 
                         if (req.AdjustPower)
                         {
-
-                            Debug.WriteLine("M List is null? : " + Measurements.Last() != null);
-                            Debug.WriteLine("M pulse is null? : " + Measurements.Last().Rpm != null);
-
-
+                            
                             int offset = req.rpm - Measurements.Last().Rpm;
                             int totalOffset = Math.Abs(offset);
 
@@ -94,7 +99,7 @@ namespace DataLibrary.Tests
                             {
                                 if (!(totalOffset > (req.rpm / (100 / req.AllowedOffset))))
                                 {
-                                    if (Measurements.Last().Pulse < 130)
+                                    if (Measurements.Last().Pulse < 120)
                                     {
                                         // Heart rate needs to be higher (so increase friction on the bike)
                                         TurboBike.SetPower(++req.requestedPower);
@@ -134,17 +139,22 @@ namespace DataLibrary.Tests
             this.Status = RunStatus.STOPPED;
         }
 
+        private void NewRequirement(AstrandPeriod req)
+        {
+            if (NewRequirements != null)
+                NewRequirements.Invoke(req, new EventArgs());
+        }
+
         public AstrandResults endTest(int age, int weight, bool isFemale)
         {
             this.Stop();
 
-            double averagePulse = MeasurementsDuringDataLibrary.Average(m => m.Pulse);
-            double averagePower = MeasurementsDuringDataLibrary.Average(m => m.Act_power);
+            int averagePulse = (int)MeasurementsDuringDataLibrary.Average(m => m.Pulse);
+            int averagePower = (int)MeasurementsDuringDataLibrary.Average(m => m.Act_power);
 
-            return new AstrandResults()
-            {
-                score = AstrandLibrary.getFactor(age, averagePower, averagePulse) * AstrandLibrary.GetCorrectieFactor(100, 130, isFemale)
-            };
+            //Debug.WriteLine("We have values. age: {0}, weight: {1}, isFemale: {2}", age.ToString(), weight.ToString(), isFemale);
+
+            return new AstrandResults(isFemale, weight, averagePulse, averagePower, age);
         }
         
 
@@ -163,7 +173,28 @@ namespace DataLibrary.Tests
         [Serializable]
         public struct AstrandResults
         {
-            public double score;
+
+            public AstrandResults(bool isFemale, int weight, int pulse, int watts, int age)
+            {
+                this.isFemale = isFemale;
+                this.weight = weight;
+                this.pulse = pulse;
+                this.watts = watts;
+                this.age = age;
+            }
+            // Auto property: Score formula function calculation
+            public double score { get { return AstrandLibrary.getVO2Max(this.watts, this.pulse, this.age, this.isFemale, this.weight); } }
+
+            public bool isFemale;
+            public int  weight;
+            public int  pulse;
+            public int  watts;
+            public int  age;
+
+            public override string ToString()
+            {
+                return score.ToString() + " ( " + AstrandLibrary.scoreToScoreStringConverter((int)score, age, isFemale) + " )";
+            }
         }
 
         ~AstrandWrapper()
@@ -172,8 +203,7 @@ namespace DataLibrary.Tests
                 Handler.GetInvocationList().ToList().ForEach(del => Handler -= (EventHandler)del);
             if (Done != null)
                 Done.GetInvocationList().ToList().ForEach(del => Done -= (EventHandler)del);
-
-            Console.WriteLine("AstrandWrapper gone");
+            
         }
 
 

@@ -3,8 +3,3 @@ C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\DataLibrary\bi
 C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\DataLibrary\obj\Debug\DataLibrary.dll
 C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\DataLibrary\obj\Debug\DataLibrary.pdb
 C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\DataLibrary\obj\Debug\DataLibrary.csprojResolveAssemblyReference.cache
-C:\Users\Bilel\Documents\AstrandTest\DataLibrary\bin\Debug\DataLibrary.dll
-C:\Users\Bilel\Documents\AstrandTest\DataLibrary\bin\Debug\DataLibrary.pdb
-C:\Users\Bilel\Documents\AstrandTest\DataLibrary\obj\Debug\DataLibrary.csprojResolveAssemblyReference.cache
-C:\Users\Bilel\Documents\AstrandTest\DataLibrary\obj\Debug\DataLibrary.dll
-C:\Users\Bilel\Documents\AstrandTest\DataLibrary\obj\Debug\DataLibrary.pdb

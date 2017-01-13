@@ -59,13 +59,23 @@ namespace DataLibrary
 
             Time += TimeSpan.FromSeconds(1);
 
+            if (new Random().Next(3) < 2)
+                setAveragePulse(this.Pulse++);
+            else
+                setAveragePulse(this.Pulse--);
+
             return m;
         }
 
-        public override void Connect()
+        public override bool Connect()
         {
             // do nothing
+            return true;
         }
 
+        internal void setAveragePulse(int pulse)
+        {
+            this.Pulse = pulse;
+        }
     }
 }

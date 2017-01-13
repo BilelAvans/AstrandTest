@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -22,21 +21,22 @@ namespace DataLibrary
             BikePort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
         }
 
-        public virtual void Connect()
+        public virtual bool Connect()
         {
             try
             {
-                Debug.WriteLine("Hallo");
-
                 if (!IsConnected)
                     BikePort.Open();
             }
             catch (IOException ex)
             {
+                return false;
             }
 
+            return true;
+
         }
-        
+
         public void Disconnect()
         {
             throw new NotImplementedException();
