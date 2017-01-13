@@ -75,16 +75,14 @@ namespace AstrandClient
         private void connectToBikeButton_Click(object sender, EventArgs e)
         {
             // Try connecting
-            Bike.Connect();
-            var b = Bike.BikePort?.IsOpen;
             
-            if (b.Value)
-            {
+            var b = Bike.Connect();
+
+            if (b)
                 bikeConnectionStatusLabel.Text = "Connected";
-            } else
-            {
+             else
                 bikeConnectionStatusLabel.Text = "Connection Failed";
-            }
+            
 
         }
 
@@ -92,38 +90,41 @@ namespace AstrandClient
         {
             // Bike started?
             if (!Bike.IsConnected)
-                Bike.Connect();
-
-            tabControl1.TabPages.Clear();
-
-            tabControl1.TabPages.Add(addTrainingTab());
-
-            Bike.SetTime(00);
-            // User data filled in?
-            int age, weight;
-
-            bool b = Int32.TryParse(weightTextBox.Text, out weight);
-            b = Int32.TryParse(ageTextBox.Text, out age) && b;
-            
-            if (b && age > 0 && weight > 0 && sexComboBox.SelectedItem != null)
-            {
-                // Test selected?
-                try
+                if (Bike.Connect())
                 {
-                    // Generate test
-                    AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandLibrary.CreateDataLibraryOneShort());
-                    astrand.Handler += GotMeasurement_Event;
-                    astrand.NewRequirements += Astrand_NewRequirements;
-                    astrand.Done += Astrand_Done;
+                    tabControl1.TabPages.Clear();
 
-                    this.Test = astrand;
-                    // Start test
-                    astrand.Start();
-                    
+                    tabControl1.TabPages.Add(addTrainingTab());
 
+                    Bike.SetTime(00);
+                    // User data filled in?
+                    int age, weight;
+
+                    bool b = Int32.TryParse(weightTextBox.Text, out weight);
+                    b = Int32.TryParse(ageTextBox.Text, out age) && b;
+
+                    if (b && age > 0 && weight > 0 && sexComboBox.SelectedItem != null)
+                    {
+                        // Test selected?
+                        try
+                        {
+                            // Generate test
+                            AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandLibrary.CreateDataLibraryOneShort());
+                            astrand.Handler += GotMeasurement_Event;
+                            astrand.NewRequirements += Astrand_NewRequirements;
+                            astrand.Done += Astrand_Done;
+
+                            this.Test = astrand;
+                            // Start test
+                            astrand.Start();
+
+
+                        }
+                        catch (Exception) { }
+                    }
                 }
-                catch (Exception) { }
-            }
+
+
         }
 
         private void Astrand_NewRequirements(object sender, EventArgs e)

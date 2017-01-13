@@ -28,7 +28,7 @@ namespace DataLibrary
                 if (!IsConnected)
                     BikePort.Open();
             }
-            catch (IOException ex)
+            catch (Exception)
             {
                 return false;
             }

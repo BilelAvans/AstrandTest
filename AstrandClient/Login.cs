@@ -25,7 +25,7 @@ namespace AstrandClient
 
             action();
 
-            new Task(async () => await tryLogin("a", "b")).ConfigureAwait(false);
+            //new Task(async () => await tryLogin("a", "b")).ConfigureAwait(false);
         }
 
         public async Task doStuff()
