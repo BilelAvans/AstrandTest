@@ -447,7 +447,7 @@ namespace DataLibrary.Tests
 
             reqs.Enqueue(new AstrandPeriod()
             {
-                PeriodLength = TimeSpan.FromSeconds(6),
+                PeriodLength = TimeSpan.FromSeconds(60),
                 requestedPower = 100,
                 AdjustPower = true,
                 pulse = 120,

@@ -10,3 +10,15 @@ c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandClient\
 c:\users\bilel\documents\visual studio 2015\Projects\AstrandTests\AstrandClient\obj\Debug\AstrandClient.pdb
 C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\AstrandClient\bin\Debug\DataLibrary.dll
 C:\Users\Bilel\Documents\Visual Studio 2015\Projects\AstrandTests\AstrandClient\bin\Debug\DataLibrary.pdb
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\bin\Debug\AstrandClient.exe.config
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.exe
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.pdb
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\bin\Debug\AstrandClient.exe
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\bin\Debug\AstrandClient.pdb
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\bin\Debug\DataLibrary.dll
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\bin\Debug\DataLibrary.pdb
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.csprojResolveAssemblyReference.cache
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.Login.resources
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.TestGUI.resources
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.TestResultPanel.resources
+C:\Users\Bilel\Documents\AstrandTest\AstrandClient\obj\Debug\AstrandClient.csproj.GenerateResource.Cache

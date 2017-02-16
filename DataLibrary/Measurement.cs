@@ -68,7 +68,7 @@ namespace DataLibrary
                 }
             }
 
-            return null;
+            throw new FormatException("Reading is not valid");
         }
 
         public override string ToString()

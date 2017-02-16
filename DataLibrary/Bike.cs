@@ -59,7 +59,7 @@ namespace DataLibrary
             BikePort.WriteLine("ST");
 
             // Wait for results
-            Thread.Sleep(125);
+            Thread.Sleep(100);
 
             // Read results
 

@@ -117,8 +117,6 @@ namespace AstrandClient
                             this.Test = astrand;
                             // Start test
                             astrand.Start();
-
-
                         }
                         catch (Exception) { }
                     }

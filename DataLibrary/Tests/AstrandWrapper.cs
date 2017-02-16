@@ -62,19 +62,22 @@ namespace DataLibrary.Tests
                 this.Status = RunStatus.RUNNING;
                 // Set bike time to 0
                 TurboBike.SetTime(0);
-
+                Debug.WriteLine("Set bike running");
                 while (RequirementsSheets.Count > 0)
                 {
  
                     // Get a requirement until timeline requires new one
                     AstrandPeriod req = RequirementsSheets.Dequeue();
                     NewRequirement(req);
+                    // Set power of the bike to the new requested power
+                    TurboBike.SetPower(req.requestedPower);
 
                     BikeSim simBike = TurboBike as BikeSim;
                     if (simBike != null)
                         simBike.setAveragePulse(req.pulse + new Random().Next(20));
 
                     //TurboBike.SetPower(req.requestedPower);
+                    Debug.WriteLine("set requirements");
 
                     DateTime now = DateTime.Now;
                     DateTime end = now + req.PeriodLength;
@@ -82,46 +85,87 @@ namespace DataLibrary.Tests
 
                     while (DateTime.Now < end && Status != RunStatus.STOPPED) {
                         while (Paused) { this.Status = RunStatus.PAUSED; Thread.Sleep(1000); now = now + TimeSpan.FromSeconds(1); }
-                        TurboBike.SetPower(req.requestedPower);
-                        
+
+                        Debug.WriteLine("Running not paused");
+
                         // Create measurement from bike
-                        Measurement m = TurboBike.GetMeasurement();
-                        Measurements.Add(m);
-                        Event(m);
-
-                        if (req.AdjustPower)
+                        try
                         {
-                            
-                            int offset = req.rpm - Measurements.Last().Rpm;
-                            int totalOffset = Math.Abs(offset);
+                            Measurement m = TurboBike.GetMeasurement();
+                            Measurements.Add(m);
+                            Event(m);
+                            Debug.WriteLine("got measuremenent");
 
-                            try
+                            if (req.AdjustPower)
                             {
-                                if (!(totalOffset > (req.rpm / (100 / req.AllowedOffset))))
-                                {
-                                    if (Measurements.Last().Pulse < 120)
-                                    {
-                                        // Heart rate needs to be higher (so increase friction on the bike)
-                                        TurboBike.SetPower(++req.requestedPower);
-                                    }
+                                Debug.WriteLine("Adjusting power, going towards {0}", req.pulse.ToString());
 
-                                    //Thread.Sleep(200);
+                                //int offset = req.rpm - Measurements.Last().Rpm;
+                                //int totalOffset = Math.Abs(offset);
+
+                                try
+                                {
+                                    //if (!(totalOffset > (req.rpm / (100 / req.AllowedOffset))))
+                                    //{
+                                        while (Measurements.Last().Pulse < req.pulse)
+                                        {
+                                        // Heart rate needs to be higher (so increase friction on the bike)
+
+                                        if (Measurements.Last().Pulse != 0)
+                                            TurboBike.SetPower(++req.requestedPower);
+                                        else
+                                            Debug.WriteLine("Got no pulse, waiting..");
+
+                                            // Get a new measurement to see if it is corrected
+                                            Debug.WriteLine("Corrected power to {0}", req.requestedPower.ToString());
+
+                                            try
+                                            {
+                                                Measurement mes = TurboBike.GetMeasurement();
+                                                // Replace last indexed list item with new one
+                                                Measurements.RemoveAt(Measurements.Count - 1);
+                                                Measurements.Add(mes);
+
+                                                Debug.WriteLine("Pulse is now {0} according to bike and power is {1}", Measurements.Last().Pulse.ToString(), Measurements.Last().Rpm.ToString());
+                                            
+                                                // Wait 5 seconds so the user can adjust his heartrate to the new set power
+                                                req.PeriodLength += TimeSpan.FromSeconds(3);
+                                                Thread.Sleep(3000);
+                                            }
+                                            catch (FormatException fEx)
+                                            {
+                                                Debug.WriteLine("Wrong measurement");
+
+                                                Debug.WriteLine(fEx.Message);
+                                            }
+
+                                        }
+
+                                        //Thread.Sleep(200);
+                                    //}
+                                }
+                                catch (ArithmeticException e)
+                                {
+                                    Console.WriteLine(e.Message);
+
                                 }
                             }
-                            catch (ArithmeticException e)
+
+                            if (req.UseMeasurements)
                             {
-                                //Console.WriteLine("You're not moving?");
-
+                                TimeSpan measurementInterval = TimeSpan.FromSeconds(15);
+                                // Only do this once per 'x' seconds
+                                // Removed code: is this needed? DateTime.Now > now + req.PeriodLength.Subtract(TimeSpan.FromMinutes(2)) && 
+                                if (LastMeasurementTakenAt < DateTime.Now.Subtract(measurementInterval))
+                                {
+                                    MeasurementsDuringDataLibrary.Add(Measurements.Last());
+                                    // 1
+                                    LastMeasurementTakenAt = DateTime.Now;
+                                }
                             }
-                        }
-
-                        if (req.UseMeasurements)
+                        } catch (FormatException fEx)
                         {
-                            if (DateTime.Now > now + req.PeriodLength.Subtract(TimeSpan.FromMinutes(2)) && LastMeasurementTakenAt < DateTime.Now.Subtract(TimeSpan.FromSeconds(15)))
-                            {
-                                MeasurementsDuringDataLibrary.Add(Measurements.Last());
-                                LastMeasurementTakenAt = DateTime.Now;
-                            }
+                            Debug.WriteLine(fEx.Message);
                         }
 
                         Thread.Sleep(1000);
