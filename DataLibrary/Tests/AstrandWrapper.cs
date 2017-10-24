@@ -21,12 +21,51 @@ namespace DataLibrary.Tests
 
         private DateTime LastMeasurementTakenAt;
 
+        private bool LastMeasurementWasUsed = true;
+
         private Queue<AstrandPeriod> RequirementsSheets = new Queue<AstrandPeriod>();
 
         public event EventHandler Handler, NewRequirements, Done;
-        
 
-        public  RunStatus Status { get; set; }
+        private BackgroundWorker MeasurementsSideThread = new BackgroundWorker();
+
+        private async void setSideThread()
+        {
+            
+            MeasurementsSideThread.RunWorkerAsync();
+        }
+
+        private async void stopSideThread()
+        {
+
+            MeasurementsSideThread.CancelAsync();
+        }
+
+        private void MeasurementsSideThread_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (Status == RunStatus.RUNNING && !e.Cancel)
+            {
+                try
+                {
+                    DateTime now = DateTime.Now;
+                    Measurement m = TurboBike.GetMeasurement();
+
+                    Measurements.Add(m);
+                    LastMeasurementWasUsed = false;
+                    Thread.Sleep((int)(1000 - (DateTime.Now - now).TotalMilliseconds));
+                    Event(m);
+                } catch (Exception ef)
+                {
+                    Debug.WriteLine(ef.Message);
+                }
+
+            }
+            
+            Debug.WriteLine(Status.ToString());
+            Debug.WriteLine(e.Cancel);
+        }
+
+        public RunStatus Status { get; set; }
 
         public bool Paused { get; set; }
         // bike must be connected before using it
@@ -37,6 +76,10 @@ namespace DataLibrary.Tests
 
             this.WorkerReportsProgress = true;
             this.WorkerSupportsCancellation = true;
+
+            MeasurementsSideThread.WorkerSupportsCancellation = true;
+
+            MeasurementsSideThread.DoWork += MeasurementsSideThread_DoWork;
         }
 
         public void Start()
@@ -51,7 +94,7 @@ namespace DataLibrary.Tests
             this.DoWork -= DoWorkMethod;
             this.Status = RunStatus.STOPPED;
         }
-        
+
 
         public void DoWorkMethod(object sender, DoWorkEventArgs args)
         {
@@ -62,125 +105,134 @@ namespace DataLibrary.Tests
                 this.Status = RunStatus.RUNNING;
                 // Set bike time to 0
                 TurboBike.SetTime(0);
-                Debug.WriteLine("Set bike running");
+                setSideThread();
+
+                bool needNewRequirement = true;
+                AstrandPeriod req = null;
+
                 while (RequirementsSheets.Count > 0)
                 {
- 
+                    Debug.WriteLine("Que pasa?"+ needNewRequirement);
                     // Get a requirement until timeline requires new one
-                    AstrandPeriod req = RequirementsSheets.Dequeue();
-                    NewRequirement(req);
+                    if (needNewRequirement)
+                    {
+                        req = RequirementsSheets.Dequeue();
+                        NewRequirement(req);
+                        needNewRequirement = false;
+
+                    }
+
                     // Set power of the bike to the new requested power
-                    TurboBike.SetPower(req.requestedPower);
 
                     BikeSim simBike = TurboBike as BikeSim;
                     if (simBike != null)
                         simBike.setAveragePulse(req.pulse + new Random().Next(20));
 
                     //TurboBike.SetPower(req.requestedPower);
-                    Debug.WriteLine("set requirements");
 
                     DateTime now = DateTime.Now;
                     DateTime end = now + req.PeriodLength;
-                                     
 
-                    while (DateTime.Now < end && Status != RunStatus.STOPPED) {
+                    DateTime thisIsItStartTime = new DateTime(1999, 1, 1);
+
+                    while (DateTime.Now < end && Status != RunStatus.STOPPED)
+                    {
                         while (Paused) { this.Status = RunStatus.PAUSED; Thread.Sleep(1000); now = now + TimeSpan.FromSeconds(1); }
 
-                        Debug.WriteLine("Running not paused");
-
-                        // Create measurement from bike
                         try
                         {
-                            Measurement m = TurboBike.GetMeasurement();
-                            Measurements.Add(m);
-                            Event(m);
-                            Debug.WriteLine("got measuremenent");
-
-                            if (req.AdjustPower)
+                            Measurement m = waitForNewMeasurement();
+                            // Create measurement from bike
+                            Debug.WriteLine(req.CurrentStatus);
+                            switch (req.CurrentStatus)
                             {
-                                Debug.WriteLine("Adjusting power, going towards {0}", req.pulse.ToString());
-
-                                //int offset = req.rpm - Measurements.Last().Rpm;
-                                //int totalOffset = Math.Abs(offset);
-
-                                try
-                                {
-                                    //if (!(totalOffset > (req.rpm / (100 / req.AllowedOffset))))
-                                    //{
-                                        while (Measurements.Last().Pulse < req.pulse)
+                                case AstrandPeriod.TestStatus.WARMING_UP:
+                                    if (m.Rpm > 49 && m.Rpm < 61)
+                                    {
+                                        TurboBike.SetPower(m.Act_power++);
+                                        Debug.WriteLine("Warming up");
+                                    } else
+                                    {
+                                        Debug.WriteLine("RPM not between 49 and 61!");
+                                    }
+                                    break;
+                                case AstrandPeriod.TestStatus.THIS_IS_IT:
+                                    if (thisIsItStartTime.Year == 1999) { thisIsItStartTime = DateTime.Now; }
+                                    if (LastMeasurementTakenAt != null && LastMeasurementTakenAt < DateTime.Now + TimeSpan.FromSeconds(15))
+                                    {
+                                        
+                                        if (DateTime.Now - thisIsItStartTime > TimeSpan.FromMinutes(4))
                                         {
-                                        // Heart rate needs to be higher (so increase friction on the bike)
-
-                                        if (Measurements.Last().Pulse != 0)
-                                            TurboBike.SetPower(++req.requestedPower);
-                                        else
-                                            Debug.WriteLine("Got no pulse, waiting..");
-
-                                            // Get a new measurement to see if it is corrected
-                                            Debug.WriteLine("Corrected power to {0}", req.requestedPower.ToString());
-
-                                            try
+                                            if (DateTime.Now - LastMeasurementTakenAt > TimeSpan.FromSeconds(59))
                                             {
-                                                Measurement mes = TurboBike.GetMeasurement();
-                                                // Replace last indexed list item with new one
-                                                Measurements.RemoveAt(Measurements.Count - 1);
-                                                Measurements.Add(mes);
-
-                                                Debug.WriteLine("Pulse is now {0} according to bike and power is {1}", Measurements.Last().Pulse.ToString(), Measurements.Last().Rpm.ToString());
-                                            
-                                                // Wait 5 seconds so the user can adjust his heartrate to the new set power
-                                                req.PeriodLength += TimeSpan.FromSeconds(3);
-                                                Thread.Sleep(3000);
+                                                MeasurementsDuringDataLibrary.Add(m);
+                                                LastMeasurementTakenAt = DateTime.Now;
                                             }
-                                            catch (FormatException fEx)
+                                        } else
+                                        {
+                                            if (DateTime.Now - LastMeasurementTakenAt > TimeSpan.FromSeconds(15))
                                             {
-                                                Debug.WriteLine("Wrong measurement");
-
-                                                Debug.WriteLine(fEx.Message);
+                                                MeasurementsDuringDataLibrary.Add(m);
+                                                LastMeasurementTakenAt = DateTime.Now;
                                             }
-
                                         }
+                                    }
+                                    break;
+                                case AstrandPeriod.TestStatus.COOL_DOWN:
 
-                                        //Thread.Sleep(200);
-                                    //}
-                                }
-                                catch (ArithmeticException e)
-                                {
-                                    Console.WriteLine(e.Message);
-
-                                }
+                                    break;
+                                    
                             }
-
-                            if (req.UseMeasurements)
+                            // Are we done checking per mode
+                            if (req.CurrentStatus == AstrandPeriod.TestStatus.WARMING_UP && DateTime.Now - now > TimeSpan.FromSeconds(15) && m.Rpm > 49 && m.Rpm < 61)
                             {
-                                TimeSpan measurementInterval = TimeSpan.FromSeconds(15);
-                                // Only do this once per 'x' seconds
-                                // Removed code: is this needed? DateTime.Now > now + req.PeriodLength.Subtract(TimeSpan.FromMinutes(2)) && 
-                                if (LastMeasurementTakenAt < DateTime.Now.Subtract(measurementInterval))
+                                needNewRequirement = true;
+                            }
+                            else if (req.CurrentStatus == AstrandPeriod.TestStatus.THIS_IS_IT)
+                            {
+                                Debug.WriteLine("THIS IS IT!!!");
+                                if (DateTime.Now - thisIsItStartTime > TimeSpan.FromMinutes(6))
                                 {
-                                    MeasurementsDuringDataLibrary.Add(Measurements.Last());
-                                    // 1
-                                    LastMeasurementTakenAt = DateTime.Now;
+                                    needNewRequirement = true;
                                 }
                             }
-                        } catch (FormatException fEx)
+                            else if (req.CurrentStatus == AstrandPeriod.TestStatus.COOL_DOWN)
+                            {
+                                TurboBike.SetPower(--Measurements.Last().Rpm);
+
+                                if (Measurements.Last().Rpm == 0)
+                                {
+                                    throw new Exception("Test is done");
+                                }
+                            }
+                            
+                        }
+                        catch (Exception e)
                         {
-                            Debug.WriteLine(fEx.Message);
+                            Debug.WriteLine(e.Message);
                         }
 
-                        Thread.Sleep(1000);
                     }
-                
+
+                    args.Cancel = true;
+                    CancelAsync();
                 }
-                
-                args.Cancel = true;
-                CancelAsync();
+
+                stopSideThread();
+                Done(this, new EventArgs());
+                Paused = false;
+                //this.Status = RunStatus.STOPPED;
             }
+        }
 
-
-            Done(this, new EventArgs());
-            Paused = false;
-            this.Status = RunStatus.STOPPED;
+        private Measurement waitForNewMeasurement()
+        {
+            while (LastMeasurementWasUsed)
+            {
+                // Just wait it out
+            }
+            LastMeasurementWasUsed = true;
+            return Measurements.Last();
         }
 
         private void NewRequirement(AstrandPeriod req)
@@ -238,6 +290,12 @@ namespace DataLibrary.Tests
             public override string ToString()
             {
                 return score.ToString() + " ( " + AstrandLibrary.scoreToScoreStringConverter((int)score, age, isFemale) + " )";
+            }
+
+            public void setWatts(int v)
+            {
+                this.watts = v;
+                Console.WriteLine(this.watts.ToString() + " now");
             }
         }
 

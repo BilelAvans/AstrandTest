@@ -14,3 +14,14 @@ C:\Users\Bilel\Documents\AstrandTest\AstrandServer\bin\Debug\AstrandServer.pdb
 C:\Users\Bilel\Documents\AstrandTest\AstrandServer\bin\Debug\DataLibrary.dll
 C:\Users\Bilel\Documents\AstrandTest\AstrandServer\bin\Debug\DataLibrary.pdb
 C:\Users\Bilel\Documents\AstrandTest\AstrandServer\obj\Debug\AstrandServer.csprojResolveAssemblyReference.cache
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\AstrandServer.exe.config
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\AstrandServer.exe
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\AstrandServer.pdb
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\DataLibrary.dll
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\DataLibrary.pdb
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\obj\Debug\AstrandServer.csprojResolveAssemblyReference.cache
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\obj\Debug\AstrandServer.csproj.CoreCompileInputs.cache
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\obj\Debug\AstrandServer.exe
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\obj\Debug\AstrandServer.pdb
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Bilel\Desktop\AstrandTest-master\AstrandServer\bin\Debug\Newtonsoft.Json.xml

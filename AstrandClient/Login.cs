@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -54,7 +55,8 @@ namespace AstrandClient
                 if (lPack.A)
                 {
                     // Nav to main lobby
-                    TestGUI gui = new TestGUI();
+                    TestGUI gui = new TestGUI(lPack, Client);
+                    //Debug.WriteLine(lPack.A);
                     gui.ShowDialog();
                     this.Dispose();
                 }

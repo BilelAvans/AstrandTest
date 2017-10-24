@@ -21,7 +21,7 @@ namespace AstrandTest.Tests
 
         public int AllowedOffset { get; set; }
 
-        public bool AdjustPower { get; set; } = false;
+
 
 
         public WhileAstrandRequirements()

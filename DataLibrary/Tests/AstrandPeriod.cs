@@ -18,11 +18,9 @@ namespace DataLibrary.Tests
         public int pulse { get; set; }
         public int rpm { get; set; } = 60;
         
-        public int AllowedOffset { get; set; }
-        // 
-        public bool AdjustPower { get; set; }
+        public enum TestStatus { WARMING_UP, THIS_IS_IT, COOL_DOWN };
 
-        public bool UseMeasurements;
+        public TestStatus CurrentStatus;
 
         public AstrandPeriod()
         {

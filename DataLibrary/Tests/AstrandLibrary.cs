@@ -395,13 +395,18 @@ namespace DataLibrary.Tests
                                                         2.0 };
 
                         double result = powers[hf - 120];
+
                         return (result * correctionFactorByAge(age) * 1000) / weight;
                     }
+                } else
+                {
+                    throw new InvalidOperationException("Watts must be 100");
                 }
 
             }
 
-            throw new NullReferenceException("hartrate must be between 120 and 170");
+            throw new NullReferenceException("Heartrate must be between 120 and 170");
+
         }
 
         public static double correctionFactorByAge(int age)
@@ -426,88 +431,30 @@ namespace DataLibrary.Tests
             throw new NullReferenceException("Age must be between 15 and 65");
         }
 
-        public static Queue<AstrandPeriod> CreateDataLibraryOneShort()
-        {
-            Queue<AstrandPeriod> reqs = new Queue<AstrandPeriod>();
-            // Warming up
-            reqs.Enqueue(new AstrandPeriod
-            {
-                PeriodLength = TimeSpan.FromSeconds(1),
-                requestedPower = 50,
-                pulse = 60,
-            });
-
-            reqs.Enqueue(new AstrandPeriod()
-            {
-                PeriodLength = TimeSpan.FromSeconds(1),
-                requestedPower = 75,
-                pulse = 80
-            });
-            // Test phase
-
-            reqs.Enqueue(new AstrandPeriod()
-            {
-                PeriodLength = TimeSpan.FromSeconds(60),
-                requestedPower = 100,
-                AdjustPower = true,
-                pulse = 120,
-                AllowedOffset = 10,
-                UseMeasurements = true
-            });
-            // Cooling down
-            reqs.Enqueue(new AstrandPeriod()
-            {
-                PeriodLength = TimeSpan.FromSeconds(1),
-                requestedPower = 75,
-                pulse = 80
-            });
-
-            reqs.Enqueue(new AstrandPeriod
-            {
-                PeriodLength = TimeSpan.FromSeconds(1),
-                requestedPower = 50,
-                pulse = 60
-            });
-
-            return reqs;
-        }
-
         public static Queue<AstrandPeriod> CreateDataLibraryOne()
         {
             Queue<AstrandPeriod> reqs = new Queue<AstrandPeriod>();
             // Warming up
             reqs.Enqueue(new AstrandPeriod
             {
-                PeriodLength = TimeSpan.FromSeconds(10),
-                requestedPower = 50
+                requestedPower = 50,
+                PeriodLength = TimeSpan.FromSeconds(15),
+                CurrentStatus = AstrandPeriod.TestStatus.WARMING_UP
             });
 
-            //reqs.Enqueue(new AstrandPeriod()
-            //{
-            //    PeriodLength = TimeSpan.FromMinutes(1),
-            //    requestedPower = 75
-            //});
-            // Test phase
-
+            // Test Period
             reqs.Enqueue(new AstrandPeriod()
             {
-                PeriodLength = TimeSpan.FromMinutes(1),
                 requestedPower = 100,
-                AdjustPower = true,
-                AllowedOffset = 5,
-                UseMeasurements = true
+                PeriodLength = TimeSpan.FromMinutes(6),
+                CurrentStatus = AstrandPeriod.TestStatus.THIS_IS_IT
             });
             // Cooling down
-            //reqs.Enqueue(new AstrandPeriod()
-            //{
-            //    PeriodLength = TimeSpan.FromMinutes(1),
-            //    requestedPower = 75
-            //});
-
             reqs.Enqueue(new AstrandPeriod
             {
-                PeriodLength = TimeSpan.FromSeconds(10),
-                requestedPower = 50
+                requestedPower = 50,
+                PeriodLength = TimeSpan.FromSeconds(30),
+                CurrentStatus = AstrandPeriod.TestStatus.COOL_DOWN
             });
 
             return reqs;

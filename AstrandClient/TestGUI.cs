@@ -1,4 +1,5 @@
 ﻿using DataLibrary;
+using DataLibrary.Packets;
 using DataLibrary.Tests;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,18 @@ namespace AstrandClient
         public List<AstrandHistory> History = new List<AstrandHistory>();
 
         public delegate void runner();
+
+        private PacketClient Client;
         
-        public TestGUI()
+        public TestGUI(LoginPacket p, PacketClient client)
         {
             InitializeComponent();
+
+            this.Client = client;
+
+            History = p.getHistory();
+
+            //newSession(new AstrandHistory("a", DateTime.Now, DateTime.Now.AddMinutes(6), new List<Measurement>(), new AstrandResults(true, 70, 135, 100, 25)));
 
             loadOptionsIntoTrainingsList();
             
@@ -53,6 +62,14 @@ namespace AstrandClient
                 (tabControl1.TabPages[0].Controls[0] as TestResultPanel).addMeasurement(mes, false);
             }
         }
+        // Add session to client 
+        // and send to server
+        private void newSession(AstrandHistory h)
+        {
+            this.Client.sendPacket(new AstrandHistoryPacket(h, AstrandHistoryPacket.CommandType.NEW_HISTORY));
+            History.Add(h);
+            loadOptionsIntoTrainingsList();
+        }
 
         private void Results_Saved(object sender, EventArgs args)
         {
@@ -61,7 +78,7 @@ namespace AstrandClient
 
         private void loadOptionsIntoTrainingsList()
         {
-            History = AstrandHistory.GetHistory();
+            //History = AstrandHistory.GetHistory();
 
             trainingsListView.Clear();
             History.ForEach(his =>
@@ -75,8 +92,9 @@ namespace AstrandClient
         private void connectToBikeButton_Click(object sender, EventArgs e)
         {
             // Try connecting
-            
+            Debug.WriteLine("Try connect");
             var b = Bike.Connect();
+            Debug.WriteLine(b);
 
             if (b)
                 bikeConnectionStatusLabel.Text = "Connected";
@@ -89,38 +107,37 @@ namespace AstrandClient
         private void startTestButton_Click(object sender, EventArgs e)
         {
             // Bike started?
-            if (!Bike.IsConnected)
-                if (Bike.Connect())
+            if (Bike.Connect())
+            {
+                tabControl1.TabPages.Clear();
+
+                tabControl1.TabPages.Add(addTrainingTab());
+
+                Bike.SetTime(00);
+                // User data filled in?
+                int age, weight;
+
+                bool b = Int32.TryParse(weightTextBox.Text, out weight);
+                b = Int32.TryParse(ageTextBox.Text, out age) && b;
+
+                if (b && age > 0 && weight > 0 && sexComboBox.SelectedItem != null)
                 {
-                    tabControl1.TabPages.Clear();
-
-                    tabControl1.TabPages.Add(addTrainingTab());
-
-                    Bike.SetTime(00);
-                    // User data filled in?
-                    int age, weight;
-
-                    bool b = Int32.TryParse(weightTextBox.Text, out weight);
-                    b = Int32.TryParse(ageTextBox.Text, out age) && b;
-
-                    if (b && age > 0 && weight > 0 && sexComboBox.SelectedItem != null)
+                    // Test selected?
+                    try
                     {
-                        // Test selected?
-                        try
-                        {
-                            // Generate test
-                            AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandLibrary.CreateDataLibraryOneShort());
-                            astrand.Handler += GotMeasurement_Event;
-                            astrand.NewRequirements += Astrand_NewRequirements;
-                            astrand.Done += Astrand_Done;
+                        // Generate test
+                        AstrandWrapper astrand = new AstrandWrapper(Bike, AstrandLibrary.CreateDataLibraryOne());
+                        astrand.Handler += GotMeasurement_Event;
+                        astrand.NewRequirements += Astrand_NewRequirements;
+                        astrand.Done += Astrand_Done;
 
-                            this.Test = astrand;
-                            // Start test
-                            astrand.Start();
-                        }
-                        catch (Exception) { }
+                        this.Test = astrand;
+                        // Start test
+                        astrand.Start();
                     }
+                    catch (Exception) { }
                 }
+            }
 
 
         }
@@ -153,16 +170,22 @@ namespace AstrandClient
 
                     bool b = Int32.TryParse(weightTextBox.Text, out weight);
                     b = Int32.TryParse(ageTextBox.Text, out age) && b;
-
-
+                    
                     string gender = sexComboBox.SelectedItem.ToString();
 
                     if (b && age > 0 && weight > 0 && gender != "")
                     {
                         try
                         {
+                            TestResultPanel resultPanel = (tabControl1.TabPages[0].Controls[0] as TestResultPanel);
                             AstrandResults results = astrand.endTest(age, weight, gender == "Female");
-                            (tabControl1.TabPages[0].Controls[0] as TestResultPanel).setResult(results);
+                            resultPanel.setResult(results);
+
+
+                            // send results to server
+                            newSession(resultPanel._history);
+
+                            loadOptionsIntoTrainingsList();
 
                         }
                         catch (Exception ex)
@@ -257,20 +280,23 @@ namespace AstrandClient
 
         private void trainingsListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-
-
+            Console.WriteLine("Training ListView ItemSelection");
             if (sender != null && e.IsSelected)
             {
+
                 if (Test != null && Test.Status == RunStatus.RUNNING)
                     Test.Stop();
 
-                string historyName = trainingsListView.SelectedItems[0].Text;
-                //Console.WriteLine
+                string historyName = trainingsListView.SelectedItems[0].Text.Split(' ').Last(t => !String.IsNullOrEmpty(t));
+                History[0].Results.setWatts(100);
+                
                 tabControl1.TabPages.Clear();
                 if (tabControl1.TabPages.Count == 0)
-                    tabControl1.TabPages.Add(addTrainingTab(History.First(h => h.Name.EndsWith(historyName))));
+                    tabControl1.TabPages.Add(addTrainingTab(History.First((AstrandHistory h) => h.Name.Contains(historyName))));
                 else
-                    tabControl1.TabPages[0] = addTrainingTab(History.First(h => h.Name.EndsWith(historyName)));
+                    tabControl1.TabPages[0] = addTrainingTab(History.First((AstrandHistory h) => h.Name.Contains(historyName)));
+
+                Console.WriteLine("Got meas");
 
             }
         }
@@ -285,11 +311,12 @@ namespace AstrandClient
                 {
                     if (item.Bounds.Contains(new Point(e.X, e.Y)))
                     {
-                        MenuItem i = new MenuItem("Delete "+ item.Text);
+                        MenuItem i = new MenuItem("Delete " + item.Text);
                         i.Tag = item;
                         i.Click += I_Click;
                         
                         trainingsListView.ContextMenu = new ContextMenu(new MenuItem[] { i });
+                        //Client.sendPacket(new AstrandHistoryPacket(History.First(h => h.Name == item.Text), AstrandHistoryPacket.CommandType.DELETE_HISTORY));
                         match = true;
                         break;
                     }
@@ -309,16 +336,20 @@ namespace AstrandClient
 
         private void I_Click(object sender, EventArgs e)
         {
-            MenuItem item = sender as MenuItem;
 
+            MenuItem item = sender as MenuItem;
+            
             if (item != null)
             {
                 AstrandHistory history = History.First(his => his.Name == ((ListViewItem)item.Tag).Text);
                 if (history != null)
                 {
-                    history.delete();
+                    //history.delete();
+                    Client.sendPacket(new AstrandHistoryPacket(history, AstrandHistoryPacket.CommandType.DELETE_HISTORY));
                     History.Remove(history);
                     trainingsListView.Items.Remove((ListViewItem)item.Tag);
+
+                    // send delete astrand history packet
                 }
             }
         }

@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DataLibrary.Users;
+using DataLibrary.Tests;
+using System.IO;
+using DataLibrary;
+using static DataLibrary.Tests.AstrandWrapper;
 
 namespace AstServer
 {
@@ -26,13 +30,15 @@ namespace AstServer
 
         public User CurrentUser { get; set; }
 
+        public List<AstrandHistory> History { get; set; } = new List<AstrandHistory>();
+
+        //public List<AstrandHistory> History { get; set; }
+
         public ConnectedPlayer(TcpClient client, AstrandServer server)
         {
             this._client = client;
             this.Server = server;
-
-            Console.WriteLine("Connected client");
-
+            
             setThread();
         }
 
@@ -107,12 +113,55 @@ namespace AstServer
                     if (lPack.A)
                     {
                         CurrentUser = Server.Storage.UserMan.AllUsers.First(u => u.Name == (string)lPack.data[0]);
+
+                        //History.Add();
+
+                        //History[0].saveFile();
+
+                        History = AstrandHistory.GetHistory(this.CurrentUser.Name);
+                        Console.WriteLine("Sending back " + History.Count().ToString() + " x History");
+                        // Profile Path creation
+                        if (!Directory.Exists(@"..\..\"+(string)pack.data[0]))
+                        {
+                            Directory.CreateDirectory(@"..\..\History\" + (string)pack.data[0]);
+                        }
+
                         lPack.data[2] = (User)CurrentUser;
-                    }
+                        lPack.data[3] = History;
+                    } 
 
                     Traffic.sendObject(lPack, _client.GetStream());
 
+                } else if (pack is AstrandHistoryPacket)
+                {
+                    AstrandHistoryPacket p = pack as AstrandHistoryPacket;
+
+                    if (p.getCommand() == AstrandHistoryPacket.CommandType.NEW_HISTORY)
+                        History.Add(p.getHistory());
+                    else
+                        History.Remove(p.getHistory());
+
+                    p.getHistory().saveFile();
+
+                    // save
+                    
                 }
+                //else if (pack is JSONPacket)
+                //{
+                //    JSONPacket jPack = pack as JSONPacket;
+
+                //    if (jPack != null)
+                //    {
+                //        if (jPack.Deserialize() is AstrandHistory[])
+                //        {
+                //            AstrandHistory[] historyPacket = (AstrandHistory[])jPack.Deserialize();
+
+
+                //        }
+
+
+                //    }
+                //}
             }
 
 

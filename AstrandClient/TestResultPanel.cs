@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static DataLibrary.Tests.AstrandWrapper;
 using static System.Windows.Forms.TabControl;
+using Newtonsoft.Json;
 
 namespace AstrandClient
 {
@@ -22,7 +23,7 @@ namespace AstrandClient
 
         private bool IsLocked { get { return _history != null; } }
 
-        private AstrandHistory _history;
+        public AstrandHistory _history { get; set; }
 
         private List<Measurement> _measurements = new List<Measurement>();
 
@@ -47,7 +48,7 @@ namespace AstrandClient
 
         private void setPanelFromHistory(AstrandHistory history)
         {
-            
+            Console.WriteLine("Setpanelfromhistory");
             _history.Measurements.ForEach(m => addMeasurement(m, true));
             setResult(_history.Results);
 
@@ -112,6 +113,7 @@ namespace AstrandClient
         {
             Runner Do = () =>
             {
+                Console.WriteLine("Set results");
                 resultLabel.Text = result.ToString();
                 this._result = result;
             };
@@ -126,10 +128,19 @@ namespace AstrandClient
 
         private void saveToHistory()
         {
-            string filename = DateTime.Now.ToString("dd-MM-yyyy HH-mm") + ".rslt";
-            _history = new AstrandHistory(filename, DateTime.Now, DateTime.Now, _measurements, _result);
-            Console.WriteLine("Saved? " + _history.saveFile());
+            //string filename = 
+            //_history = new AstrandHistory(_history.Name, DateTime.Now, DateTime.Now, _measurements, _result);
+            //Console.WriteLine("Saved? " + _history.saveFile());
             Saved(_history);
+
+            sendHistoryToServer(_history);
+        }
+
+        private void sendHistoryToServer(AstrandHistory hist)
+        {
+            var a = JsonConvert.SerializeObject(hist);
+
+            Debug.WriteLine(a);
         }
 
         private void chart1_Click(object sender, EventArgs e)

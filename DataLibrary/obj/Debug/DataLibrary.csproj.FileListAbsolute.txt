@@ -8,3 +8,11 @@ C:\Users\Bilel\Documents\AstrandTest\DataLibrary\obj\Debug\DataLibrary.dll
 C:\Users\Bilel\Documents\AstrandTest\DataLibrary\obj\Debug\DataLibrary.pdb
 C:\Users\Bilel\Documents\AstrandTest\DataLibrary\bin\Debug\DataLibrary.dll
 C:\Users\Bilel\Documents\AstrandTest\DataLibrary\bin\Debug\DataLibrary.pdb
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\bin\Debug\DataLibrary.dll
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\bin\Debug\DataLibrary.pdb
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\obj\Debug\DataLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\obj\Debug\DataLibrary.dll
+C:\Users\Bilel\Desktop\AstrandTest-master\DataLibrary\obj\Debug\DataLibrary.pdb

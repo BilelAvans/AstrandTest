@@ -21,6 +21,10 @@ namespace DataLibrary
 
         public override bool IsConnected { get { return true; } }
 
+        public Measurement[] ConceptMeasurements = new Measurement[] { new Measurement(130, 60, 60, 0, 0, 0, new TimeSpan(), 100),
+                                                                       new Measurement(130, 60, 60, 0, 0, 0, new TimeSpan(), 100),
+                                                                       new Measurement(130, 60, 60, 0, 0, 0, new TimeSpan(), 100) };
+
 
         public BikeSim()
         {

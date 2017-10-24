@@ -19,52 +19,68 @@ namespace DataLibrary.Tests
         public List<Measurement> Measurements { get; set; } = new List<Measurement>();
 
         public AstrandResults Results { get; set; }
+
+        private string _username;
         
-        public AstrandHistory(string filename, DateTime start, DateTime end, List<Measurement> measurements, AstrandResults results)
+        public AstrandHistory(string username, DateTime start, DateTime end, List<Measurement> measurements, AstrandResults results)
         {
+            this.Name = DateTime.Now.ToString("dd-MM-yyyy HH-mm") + ".rslt";
+
             this.Start = start;
             this.End = end;
             this.Measurements = measurements;
             this.Results = results;
-            this.Name = filename;
+            this._username = username;
         }
 
-        public static bool loadFile(out AstrandHistory aHistory, string filename)
+        public static bool loadFile(out AstrandHistory aHistory, string username, string filename)
         {
-            FileStream file = File.OpenRead(@"..\..\History\" + filename);
-            try
+
+            if (Directory.Exists(@"..\..\History\" + username + " "))
             {
-                BinaryFormatter deserializer = new BinaryFormatter();
-                object ob = deserializer.Deserialize(file);
-                if (ob is AstrandHistory)
+
+                FileStream file = File.OpenRead(@"..\..\History\" + username + "\\" + filename);
+
+                try
                 {
-                    aHistory = (AstrandHistory)ob;
+                    BinaryFormatter deserializer = new BinaryFormatter();
+                    object ob = deserializer.Deserialize(file);
+                    if (ob is AstrandHistory)
+                    {
+                        aHistory = (AstrandHistory)ob;
 
-                    file.Close();
-                    return true;
+                        file.Close();
+                        return true;
+                    }
+
                 }
-
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                file.Close();
+                
             }
-            file.Close();
+
             aHistory = null;
-
-
             return false;
         }
 
         public bool saveFile()
         {
-
+            if (!Directory.Exists(@"..\..\History\" + _username + " "))
+                Directory.CreateDirectory(@"..\..\History\" + _username);
+            
             FileStream file;
 
-            if (!File.Exists(@"..\..\History\" + Name))
-                file = File.Create(@"..\..\History\" + Name);
-            else
-                file = File.Open(@"..\..\History\" + Name, FileMode.Open);
+            if (!File.Exists(@"..\..\History\" + _username))
+            {
 
+                file = File.Create(@"..\..\History\" + _username + "\\" + Name);
+            }
+            else
+                file = File.Open(@"..\..\History\" + _username + "\\" + Name, FileMode.OpenOrCreate);
+            
             try
             {
                 BinaryFormatter serializer = new BinaryFormatter();
@@ -83,21 +99,24 @@ namespace DataLibrary.Tests
 
         public void delete()
         {
-            File.Delete(@"..\..\History\" + Name);
+            File.Delete(@"..\..\History\" + _username + "\\" + Name);
         }
         // Get all files in set directory
-        public static List<AstrandHistory> GetHistory()
+        public static List<AstrandHistory> GetHistory(string username)
         {
+            if (!Directory.Exists(@"..\..\History\" + username))
+                Directory.CreateDirectory(@"..\..\History\" + username);
+
             List<AstrandHistory> History = new List<AstrandHistory>();
 
-            if (Directory.Exists(@"..\..\History\"))
+            if (Directory.Exists(@"..\..\History\" + username + "\\"))
             {
-                string[] dir = Directory.GetFiles(@"..\..\History\");
+                string[] dir = Directory.GetFiles(@"..\..\History\" + username + "\\");
 
                 dir.ToList().ForEach(filename =>
                 {
                     AstrandHistory history;
-                    if (AstrandHistory.loadFile(out history, filename.Split('\\')[filename.Split('\\').Count() - 1]))
+                    if (AstrandHistory.loadFile(out history, username, filename.Split('\\')[filename.Split('\\').Count() - 1]))
                     {
                         History.Add(history);
                     }
